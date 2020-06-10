@@ -27,3 +27,7 @@ db_allocated_storage = 5
 db_name = "demodb"
 db_username = "demodb"
 db_password = "Infosys23"
+
+#Route53
+hosted_zone_name = "record.name"
+record_name      = "employee"
