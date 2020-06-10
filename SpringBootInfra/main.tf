@@ -158,6 +158,14 @@ variable "db_password" {
   description = "db password"
 }
 
+variable "hosted_zone_name" {
+  description = "host name"
+}
+
+variable "record_name" {
+  description = "record name"
+}
+
 #module "vpc" {
 #  source = "./modules/vpc"
 #  name                       = var.name
@@ -220,6 +228,22 @@ module "app-elb" {
   vpc_private_subnets           = "${module.vpc.private_subnets}"
 }
 
+resource "aws_route53_zone" "elb-route" {
+  name = "${var.hosted_zone_name}"
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = "${aws_route53_zone.elb-route.zone_id}"
+  name    = "${var.record_name}"
+  type    = "A"
+
+  alias {
+    name                   = "${module.web-elb.dns_name}"
+    zone_id                = "${module.web-elb.zone_id}"
+    evaluate_target_health = true
+  }
+}
+  
 module "web-asg" {
   source = "./modules/web-asg"
   name = "${format("%s-web-asg", var.name)}"
