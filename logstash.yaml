@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: logstash-configmap
-  namespace: kube-system
+  name: logstash
+  #namespace: kube-system
 data:
   logstash.yml: |
     http.host: "0.0.0.0"
@@ -28,15 +28,15 @@ data:
     }
     output {
         elasticsearch {
-            hosts => [ "elasticsearch-logging:9200" ]
+            hosts => [ "elasticsearch:9200" ]
         }
     }
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: logstash-deployment
-  namespace: kube-system
+  name: logstash
+  #namespace: kube-system
 spec:
   replicas: 1
   selector:
@@ -62,13 +62,13 @@ spec:
       volumes:
       - name: config-volume
         configMap:
-          name: logstash-configmap
+          name: logstash
           items:
             - key: logstash.yml
               path: logstash.yml
       - name: logstash-pipeline-volume
         configMap:
-          name: logstash-configmap
+          name: logstash
           items:
             - key: logstash.conf
               path: logstash.conf
@@ -76,8 +76,8 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: logstash-service
-  namespace: kube-system
+  name: logstash
+  #namespace: kube-system
 spec:
   selector:
     app: logstash
