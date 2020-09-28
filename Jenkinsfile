@@ -5,8 +5,6 @@ pipeline {
     password (name: 'AWS_SECRET_ACCESS_KEY')
   }
   environment {
-    TF_WORKSPACE = 'dev' //Sets the Terraform Workspace
-    TF_IN_AUTOMATION = 'true'
     AWS_ACCESS_KEY_ID = "${params.AWS_ACCESS_KEY_ID}"
     AWS_SECRET_ACCESS_KEY = "${params.AWS_SECRET_ACCESS_KEY}"
   } 
@@ -19,20 +17,11 @@ pipeline {
         }
         sh "terraform -version"
       }
-    }
-    stage ('Checking Directory Path') {
-      steps {
-        sh """
-        ls -lart
-        cd infra_provisioning
-        ls -lart
-        """
-      }
-    }  
+    } 
     stage('Terraform Init') {
       steps {
         sh """
-        cd /root/InfraCode/infra_provisioning
+        cd /root/InfraCode/${params.env}/${params.version}infra_provisioning
         ls -lart
         terraform init
         """
@@ -41,7 +30,7 @@ pipeline {
     stage('Terraform Plan') {
       steps {
         sh """
-        cd /root/InfraCode/infra_provisioning
+        cd /root/InfraCode/${params.env}/${params.version}infra_provisioning
         ls -lart
         terraform plan -out=tfplan
         """
@@ -49,7 +38,6 @@ pipeline {
     }
     stage('Terraform Apply') {
       steps {
-        input 'Apply Plan'
         sh "cat tfplan"
       }
     }
