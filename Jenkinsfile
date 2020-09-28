@@ -22,15 +22,20 @@ pipeline {
     }  
     stage('Terraform Init') {
       steps {
-        sh "cd /root/InfraCode"
-        sh "pwd"
-        sh "ls -lart"
-        sh "terraform init"
+        sh """
+        cd /root/InfraCode/infra_provisioning
+        ls -lart
+        terraform init
+        """
       }
     }
     stage('Terraform Plan') {
       steps {
-        sh "terraform plan -out=tfplan"
+        sh """
+        cd /root/InfraCode/infra_provisioning
+        ls -lart
+        terraform plan -out=tfplan
+        """
       }
     }
     stage('Terraform Apply') {
