@@ -60,7 +60,6 @@ pipeline {
         git add .
         git commit -m "adding updated tfstate file files"
         git push https://${params.GitUsername}:${params.GitPassword}@github.com/am2308/git_am2308.git --all
-        echo 'done'
         """
       }
     }
