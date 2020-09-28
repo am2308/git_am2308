@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                Terraform init
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                Terraform plan --auto-approve
             }
         }
         stage('Deploy') {
