@@ -1,8 +1,8 @@
 #########################
 # etcd cluster instances
 #########################
-resource "aws_key_pair" "etcd_keypair" {
-  key_name = "etcd_key"
+resource "aws_key_pair" "k8etcd_keypair" {
+  key_name = "k8etcd_key"
   public_key = "${var.default_keypair_public_key}"
 }
 
@@ -18,7 +18,7 @@ resource "aws_instance" "etcd" {
 
     availability_zone = "${var.zone}"
     vpc_security_group_ids = ["${aws_security_group.kubernetes.id}"]
-    key_name = aws_key_pair.etcd_keypair.key_name
+    key_name = aws_key_pair.k8etcd_keypair.key_name
 
     tags = {
       Owner = "${var.owner}"
