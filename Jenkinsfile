@@ -21,6 +21,7 @@ pipeline {
     }  
     stage('Terraform Init') {
       steps {
+        sh "cd /root/InfraCode"
         sh "pwd"
         sh "ls -lart"
         sh "terraform init"
