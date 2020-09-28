@@ -31,7 +31,7 @@ pipeline {
     stage('Terraform Apply') {
       steps {
         input 'Apply Plan'
-        sh "echo 'deoloying'"
+        sh "cat tfplan"
       }
     }
   }
