@@ -10,7 +10,7 @@ variable default_keypair_public_key {
 
 variable default_keypair_name {
   description = "Name of the KeyPair used for all nodes"
-  default = "k8s-not-the-hardest-way"
+  default = "k8s-the-hardest-way"
 }
 
 
@@ -21,7 +21,7 @@ variable vpc_name {
 
 variable elb_name {
   description = "Name of the ELB for Kubernetes API"
-  default = "kubernetes"
+  default = "kubernetes-elb"
 }
 
 variable owner {
