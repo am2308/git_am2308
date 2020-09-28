@@ -16,16 +16,19 @@ pipeline {
         sh "pwd"
         sh "ls -lart"
         sh "cd infra_provisioning"
+        sh "ls -lart"
       }
     }  
     stage('Terraform Init') {
       steps {
-        sh "terraform init -input=false"
+        sh "pwd"
+        sh "ls -lart"
+        sh "terraform init"
       }
     }
     stage('Terraform Plan') {
       steps {
-        sh "terraform plan -out=tfplan -input=false"
+        sh "terraform plan -out=tfplan"
       }
     }
     stage('Terraform Apply') {
