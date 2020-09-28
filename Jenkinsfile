@@ -40,7 +40,7 @@ pipeline {
       steps {
         sh """
         cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
-        terraform apply tfplan --auto-approve
+        terraform apply tfplan -auto-approve
         """
       }
     }
