@@ -5,7 +5,7 @@
 # The following Roles and Policy are mostly for future use
 
 resource "aws_iam_role" "kubernetes" {
-  name = "kubernetes"
+  name = "kubernetes-role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -24,7 +24,7 @@ EOF
 
 # Role policy
 resource "aws_iam_role_policy" "kubernetes" {
-  name = "kubernetes"
+  name = "kubernetes-policy"
   role = "${aws_iam_role.kubernetes.id}"
   policy = <<EOF
 {
