@@ -44,5 +44,13 @@ pipeline {
         """
       }
     }
+    stage('Terraform Apply') {
+      steps {
+        sh """
+        cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
+        cat tfplan
+        """
+      }
+    }
   }
 }
