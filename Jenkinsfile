@@ -44,7 +44,7 @@ pipeline {
         """
       }
     }
-    stage('Terraform Apply') {
+    stage('Pushing back changes back to SCM') {
       steps {
         sh """
         cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
