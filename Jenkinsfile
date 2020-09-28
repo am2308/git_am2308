@@ -13,10 +13,11 @@ pipeline {
   stages {
     stage ('Checking Directory Path') {
       steps {
-        sh "pwd"
-        sh "ls -lart"
-        sh "cd infra_provisioning"
-        sh "ls -lart"
+        sh """
+        ls -lart
+        cd infra_provisioning
+        ls -lart
+        """
       }
     }  
     stage('Terraform Init') {
