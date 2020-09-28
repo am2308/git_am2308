@@ -17,7 +17,7 @@ pipeline {
           def tfHome = tool name: 'TerraformJenkins'
           env.PATH = "${tfHome}:${env.PATH}"
         }
-        sh "terraform —-version"
+        sh "terraform -version"
       }
     }
     stage ('Checking Directory Path') {
