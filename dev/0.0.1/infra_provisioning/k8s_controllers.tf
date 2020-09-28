@@ -2,8 +2,8 @@
 # K8s Control Pane instances
 ############################
 
-resource "aws_key_pair" "k8contrl_keypair" {
-  key_name = "k8contrl_key"
+resource "aws_key_pair" "k8control_keypair" {
+  key_name = "k8control_key"
   public_key = "${var.default_keypair_public_key}"
 }
 
@@ -22,7 +22,7 @@ resource "aws_instance" "controller" {
 
     availability_zone = "${var.zone}"
     vpc_security_group_ids = ["${aws_security_group.kubernetes.id}"]
-    key_name = aws_key_pair.k8contrl_keypair.key_name
+    key_name = aws_key_pair.k8control_keypair.key_name
 
     tags = {
       Owner = "${var.owner}"
