@@ -53,5 +53,15 @@ pipeline {
         """
       }
     }
+    stage('Pusshing back changes back to SCM') {
+      steps {
+        sh """
+        cd /root/InfraCode
+        git add .
+        git commit -m "adding updated tfstate file files"
+        git push https://${params.GitUsername}:${params.GitPassword}@github.com/am2308/git_am2308.git --all
+        """
+      }
+    }
   }
 }
