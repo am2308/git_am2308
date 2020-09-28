@@ -21,7 +21,7 @@ pipeline {
     stage('Terraform Init') {
       steps {
         sh """
-        cd /root/InfraCode/${params.env}/${params.version}infra_provisioning
+        cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
         ls -lart
         terraform init
         """
@@ -30,7 +30,7 @@ pipeline {
     stage('Terraform Plan') {
       steps {
         sh """
-        cd /root/InfraCode/${params.env}/${params.version}infra_provisioning
+        cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
         ls -lart
         terraform plan -out=tfplan
         """
@@ -38,7 +38,10 @@ pipeline {
     }
     stage('Terraform Apply') {
       steps {
-        sh "cat tfplan"
+        sh """
+        cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
+        cat tfplan
+        """
       }
     }
   }
