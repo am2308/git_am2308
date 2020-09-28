@@ -49,7 +49,13 @@ pipeline {
       steps {
         sh """
         cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
-        terraform apply -auto-approve tfplan
+        if [[ ${params.Action} == "Provision" ]]
+        then
+            terraform apply -auto-approve tfplan
+        else
+            terraform destroy -auto-approve
+        fi
+          
         """
       }
     }
@@ -57,6 +63,7 @@ pipeline {
       steps {
         sh """
         cd /root/InfraCode
+        rm -rf infra_provisioning/.terraform
         git add .
         git commit -m "adding updated tfstate file files"
         git push https://${params.GitUsername}:${params.GitPassword}@github.com/am2308/git_am2308.git --all
