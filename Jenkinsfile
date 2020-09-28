@@ -11,6 +11,15 @@ pipeline {
     AWS_SECRET_ACCESS_KEY = "${params.AWS_SECRET_ACCESS_KEY}"
   } 
   stages {
+    stage(‘Set Terraform path’) {
+      steps {
+        script {
+          def tfHome = tool name: ‘Terraform’
+          env.PATH = “${tfHome}:${env.PATH}”
+        }
+        sh "terraform — version"
+      }
+    }
     stage ('Checking Directory Path') {
       steps {
         sh """
