@@ -40,17 +40,7 @@ pipeline {
       steps {
         sh """
         cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
-        cat tfplan
-        """
-      }
-    }
-    stage('Pushing back changes back to SCM') {
-      steps {
-        sh """
-        cd /root/InfraCode
-        git add .
-        git commit -m "Updating SCM with latest tfstate files" 
-        git push https://${params.GitUsername}:${GitPassword}%40github.com/am2308/git_am2308.git --all
+        terraform apply tfplan --auto-approve
         """
       }
     }
