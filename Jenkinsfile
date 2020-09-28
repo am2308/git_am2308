@@ -49,13 +49,7 @@ pipeline {
       steps {
         sh """
         cd /root/InfraCode/${params.env}/${params.version}/infra_provisioning
-        if [[ ${params.Action} == "Provision" ]]
-        then
-            terraform apply -auto-approve tfplan
-        else
-            terraform destroy -auto-approve
-        fi
-          
+        terraform apply -auto-approve tfplan  
         """
       }
     }
