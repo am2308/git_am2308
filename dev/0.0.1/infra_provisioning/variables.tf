@@ -21,7 +21,7 @@ variable vpc_name {
 
 variable elb_name {
   description = "Name of the ELB for Kubernetes API"
-  default = "kubernetes-elb"
+  default = "kubernetes"
 }
 
 variable owner {
