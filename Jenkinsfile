@@ -56,6 +56,7 @@ pipeline {
     stage('Testing infra provisioning') {
       steps {
         sh """
+        sleep 60s
         chmod 755 /root/InfraCode/${params.env}/${params.version}/infra_provisioning/TestInfraProvision.py
         python /root/InfraCode/${params.env}/${params.version}/infra_provisioning/TestInfraProvision.py ${params.Region}
         """
