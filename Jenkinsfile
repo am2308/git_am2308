@@ -53,6 +53,13 @@ pipeline {
         """
       }
     }
+    stage('Testing infra provisioning') {
+      steps {
+        sh """
+        python /root/InfraCode/${params.env}/${params.version}/infra_provisioning/TestInfraProvision.py ${params.Region}
+        """
+      }
+    }
     stage('Pusshing back changes back to SCM') {
       steps {
         sh """
