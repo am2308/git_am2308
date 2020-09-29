@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      stack: elk
+  template:
+    metadata:
+      labels:
+        app: elk
+        stack: elk
+    spec:
+      containers:
+      - name: elasticsearch
+        image: k8s.gcr.io/elasticsearch:v6.2.4
+        ports:
+        - containerPort: 9200
+      - name: kibana
+        image: docker.elastic.co/kibana/kibana-oss:6.2.4
+        ports:
+        - containerPort: 5601
+        env:
+          - name: ELASTICSEARCH_URL
+            value: "http://localhost:9200"
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:6.3.0
+        ports:
+        - containerPort: 8080
+        args:
+        - "-e"
+        - "input { http { } } output { elasticsearch { hosts => [‘localhost:9200’] } }"
