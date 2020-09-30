@@ -55,9 +55,9 @@ Terraform expects some variables to define your working environment:
 
 You may optionally redefine:
 
-- `default_keypair_name`: AWS key-pair name for all instances.  (Default: "k8s-not-the-hardest-way")
-- `vpc_name`: VPC Name. Must be unique in the AWS Account (Default: "kubernetes")
-- `elb_name`: ELB Name for Kubernetes API. Can only contain characters valid for DNS names. Must be unique in the AWS Account (Default: "kubernetes")
+- `default_keypair_name`: AWS key-pair name for all instances.
+- `vpc_name`: VPC Name. Must be unique in the AWS Account
+- `elb_name`: ELB Name for Kubernetes API. Can only contain characters valid for DNS names. Must be unique in the AWS Account
 
 
 ### Changing AWS Region
@@ -66,7 +66,7 @@ By default, the project uses `eu-west-1`. To use a different AWS Region, set add
 
 - `region`: AWS Region (default: "eu-west-1").
 - `zone`: AWS Availability Zone (default: "eu-west-1a")
-- `default_ami`: Pick the AMI for the new Region from https://cloud-images.ubuntu.com/locator/ec2/: Ubuntu 16.04 LTS (xenial), HVM:EBS-SSD
+- `default_ami`: Provide the ami as per your ask
 
 ## Provision infrastructure, with Terraform
 
