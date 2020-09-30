@@ -59,8 +59,6 @@ You may optionally redefine:
 - `vpc_name`: VPC Name. Must be unique in the AWS Account (Default: "kubernetes")
 - `elb_name`: ELB Name for Kubernetes API. Can only contain characters valid for DNS names. Must be unique in the AWS Account (Default: "kubernetes")
 
-```
-
 
 ### Changing AWS Region
 
@@ -74,7 +72,6 @@ By default, the project uses `eu-west-1`. To use a different AWS Region, set add
 
 Run Terraform commands from `./terraform` subdirectory.
 
-```
 $ terraform plan
 $ terraform apply
 ```
