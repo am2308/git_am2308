@@ -8,7 +8,15 @@ resource "aws_key_pair" "worker_keypair" {
   public_key = "${var.default_keypair_public_key}"
 }
 
+resource "aws_eip" "worker" {
+  vpc  = true
+  tags = local.tags
+}
 
+resource "aws_eip_association" "worker" {
+  allocation_id = aws_eip.worker.id
+  instance_id   = aws_instance.worker.[0].id
+}
 resource "aws_instance" "worker" {
     count = 3
     ami = "${lookup(var.amis, var.region)}"
