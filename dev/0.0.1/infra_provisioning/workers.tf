@@ -8,15 +8,15 @@ resource "aws_key_pair" "worker_keypair" {
   public_key = "${var.default_keypair_public_key}"
 }
 
-resource "aws_eip" "worker" {
-  vpc  = true
-  tags = {
-      Name = "worker-eip"
-    }
-}
+#resource "aws_eip" "worker" {
+#  vpc  = true
+#  tags = {
+#      Name = "worker-eip"
+#    }
+#}
 
 resource "aws_eip_association" "worker" {
-  allocation_id = aws_eip.worker.id
+  allocation_id = "eipalloc-0f539763884894e12"
   instance_id   = aws_instance.worker.0.id
 }
 resource "aws_instance" "worker" {
