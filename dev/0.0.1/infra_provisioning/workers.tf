@@ -15,7 +15,7 @@ resource "aws_eip" "worker" {
 
 resource "aws_eip_association" "worker" {
   allocation_id = aws_eip.worker.id
-  instance_id   = aws_instance.worker.[0].id
+  instance_id   = aws_instance.worker.0.id
 }
 resource "aws_instance" "worker" {
     count = 3
