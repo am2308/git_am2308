@@ -10,7 +10,9 @@ resource "aws_key_pair" "worker_keypair" {
 
 resource "aws_eip" "worker" {
   vpc  = true
-  tags = local.tags
+  tags = {
+      Name = "worker-eip"
+    }
 }
 
 resource "aws_eip_association" "worker" {
